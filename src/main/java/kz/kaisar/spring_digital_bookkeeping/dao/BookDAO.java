@@ -37,4 +37,12 @@ public class BookDAO {
         );
     }
 
+    public void update(int id, Book updatedBook) {
+        jdbcTemplate.update("UPDATE Book SET name=?, author=?, year=? WHERE id=?",
+                updatedBook.getName(),
+                updatedBook.getAuthor(),
+                updatedBook.getYear(),
+                id);
+    }
+
 }
