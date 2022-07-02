@@ -1,6 +1,7 @@
 package kz.kaisar.spring_digital_bookkeeping.dao;
 
 import kz.kaisar.spring_digital_bookkeeping.models.Book;
+import kz.kaisar.spring_digital_bookkeeping.models.Person;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,13 @@ public class BookDAO {
                 new Object[]{id},
                 new BeanPropertyRowMapper<>(Book.class)
         ).stream().findAny().orElse(null);
+    }
+
+    public void save(Book book) {
+        jdbcTemplate.update(
+                "INSERT INTO Book(name, author, year) VALUES (?, ?, ?)",
+                book.getName(), book.getAuthor(), book.getYear()
+        );
     }
 
 }
