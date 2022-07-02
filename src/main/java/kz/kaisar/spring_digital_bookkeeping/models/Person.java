@@ -1,6 +1,5 @@
 package kz.kaisar.spring_digital_bookkeeping.models;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -12,22 +11,17 @@ public class Person {
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
 
-    @Min(value = 0, message = "Age should be greater than 0")
-    private int age;
-
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
-    private String email;
+    @Min(value = 1923, message = "Year of birth should be greater than 1923")
+    private int yearOfBirth;
 
     public Person() {
 
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int yearOfBirth) {
         this.id = id;
         this.name = name;
-        this.age = age;
-        this.email = email;
+        this.yearOfBirth = yearOfBirth;
     }
 
     public int getId() {
@@ -46,19 +40,12 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
