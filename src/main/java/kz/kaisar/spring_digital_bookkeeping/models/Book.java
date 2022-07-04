@@ -1,7 +1,6 @@
 package kz.kaisar.spring_digital_bookkeeping.models;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -18,8 +17,6 @@ public class Book {
 
     @Max(value = 2022, message = "The writing date of the book cannot be more than 2022")
     private int year;
-
-    private int person_id;
 
     public Book() {
     }
@@ -62,11 +59,4 @@ public class Book {
         this.year = year;
     }
 
-    public int getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
-    }
 }
