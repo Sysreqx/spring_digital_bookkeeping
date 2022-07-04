@@ -19,6 +19,8 @@ public class Book {
     @Max(value = 2022, message = "The writing date of the book cannot be more than 2022")
     private int year;
 
+    private int person_id;
+
     public Book() {
     }
 
@@ -58,5 +60,13 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getPerson_id() {
+        return person_id;
+    }
+
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 }
