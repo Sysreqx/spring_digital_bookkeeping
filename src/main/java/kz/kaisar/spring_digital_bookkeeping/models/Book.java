@@ -59,4 +59,12 @@ public class Book {
         this.year = year;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                '}';
+    }
 }
