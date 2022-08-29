@@ -19,7 +19,7 @@ drop table if exists Book;
 create table Book(
                      id SERIAL primary key,
                      person_id int references Person(id) on delete set null,
-                     name varchar unique not null,
+                     name varchar not null,
                      author varchar not null,
                      year int check (year <= 2022)
     );

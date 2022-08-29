@@ -2,6 +2,7 @@ package kz.kaisar.spring_digital_bookkeeping.dao;
 
 import kz.kaisar.spring_digital_bookkeeping.models.Book;
 import kz.kaisar.spring_digital_bookkeeping.models.Person;
+import kz.kaisar.spring_digital_bookkeeping.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,8 +50,8 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
     }
 
-    public Optional<Person> getPersonByFullName(String fullName) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE full_name=?", new Object[]{fullName},
+    public Optional<Person> getPersonByName(String name) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE name=?", new Object[]{name},
                 new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 

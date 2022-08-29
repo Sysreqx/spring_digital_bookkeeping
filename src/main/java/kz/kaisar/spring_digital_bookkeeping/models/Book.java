@@ -11,11 +11,11 @@ public class Book {
     @Size(min = 2, max = 30, message = "Book name should be between 2 and 30 characters")
     private String name;
 
-    @NotEmpty(message = "Book name should not be empty")
-    @Size(min = 2, max = 100, message = "Book name should be between 2 and 30 characters")
+    @NotEmpty(message = "Book author should not be empty")
+    @Size(min = 2, max = 100, message = "Book name should be between 2 and 100 characters")
     private String author;
 
-    @Max(value = 2022, message = "The writing date of the book cannot be more than 2022")
+    @Max(value = 2022, message = "The writing date of the book cannot be greater than 2022")
     private int year;
 
     public Book() {
