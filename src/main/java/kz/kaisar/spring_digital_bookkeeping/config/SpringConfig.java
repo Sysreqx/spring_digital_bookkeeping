@@ -28,6 +28,7 @@ import java.util.Properties;
 @ComponentScan("kz.kaisar.spring_digital_bookkeeping")
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories("kz.kaisar.spring_digital_bookkeeping.repositories")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
