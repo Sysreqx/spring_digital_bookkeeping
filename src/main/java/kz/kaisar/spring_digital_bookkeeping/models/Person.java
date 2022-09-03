@@ -1,5 +1,7 @@
 package kz.kaisar.spring_digital_bookkeeping.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -26,6 +28,7 @@ public class Person {
     private int yearOfBirth;
 
     @OneToMany(mappedBy = "owner")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Book> books;
 
     public Person() {

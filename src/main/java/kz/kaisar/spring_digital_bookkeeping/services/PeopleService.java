@@ -51,8 +51,14 @@ public class PeopleService {
     }
 
     public List<Book> getBooksByPersonId(int id) {
+
         Optional<Person> person = peopleRepository.findById(id);
-        Hibernate.initialize(person.orElse(null));
-        return Objects.requireNonNull(person.orElse(null)).getBooks();
+
+        Hibernate.initialize(person.get().getBooks());
+        return person.get().getBooks();
+    }
+
+    public Optional<Object> getPersonByName(String name) {
+        return Optional.ofNullable(peopleRepository.findByNameIgnoreCase(name));
     }
 }

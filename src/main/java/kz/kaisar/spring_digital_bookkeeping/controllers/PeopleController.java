@@ -1,8 +1,8 @@
 package kz.kaisar.spring_digital_bookkeeping.controllers;
 
-import kz.kaisar.spring_digital_bookkeeping.dao.PersonDAO;
 import kz.kaisar.spring_digital_bookkeeping.models.Person;
 import kz.kaisar.spring_digital_bookkeeping.services.PeopleService;
+import kz.kaisar.spring_digital_bookkeeping.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +17,14 @@ public class PeopleController {
 
     private final PeopleService peopleService;
 
-//    private final PersonValidator personValidator;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PeopleService peopleService,
+                            PersonValidator personValidator) {
+
         this.peopleService = peopleService;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -46,7 +49,7 @@ public class PeopleController {
     public String create(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult) {
 
-//        personValidator.validate(person, bindingResult);
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors())
             return "people/new";
@@ -65,7 +68,7 @@ public class PeopleController {
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") int id) {
 
-//        personValidator.validate(person, bindingResult);
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors())
             return "people/edit";
