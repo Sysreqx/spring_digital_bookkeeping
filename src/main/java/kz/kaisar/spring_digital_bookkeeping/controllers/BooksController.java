@@ -7,12 +7,14 @@ import kz.kaisar.spring_digital_bookkeeping.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,12 +38,14 @@ public class BooksController {
     @GetMapping()
     public String index(Model model,
                         @RequestParam("page") Optional<Integer> page,
-                        @RequestParam("size") Optional<Integer> size) {
+                        @RequestParam("size") Optional<Integer> size,
+                        @RequestParam("sort_by_year") Optional<Boolean> isSortByYear) {
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(booksService.findAll().size());
+        boolean sortOrNoSort = isSortByYear.orElse(false);
 
-        Page<Book> bookPage = booksService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        Page<Book> bookPage = booksService.findPaginated(PageRequest.of(currentPage - 1, pageSize), sortOrNoSort);
 
         //model.addAttribute("books", booksService.findAll());
         model.addAttribute("bookPage", bookPage);
@@ -54,7 +58,7 @@ public class BooksController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "books/index";
+            return "books/index";
     }
 
     @GetMapping("/{id}")

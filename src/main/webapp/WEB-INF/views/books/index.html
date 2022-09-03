@@ -18,7 +18,7 @@
         </p>
     </nav>
 
-    <a th:if="${bookPage.totalPages > 0}" class="pagination"
+    <a th:if="${bookPage.totalPages > 1}" class="pagination"
          th:each="pageNumber : ${pageNumbers}">
         <a th:href="@{/books(size=${bookPage.size}, page=${pageNumber})}"
            th:text=${pageNumber}></a>

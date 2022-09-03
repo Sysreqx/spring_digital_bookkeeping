@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,13 +32,22 @@ public class BooksService {
         return booksRepository.findAll();
     }
 
-    public Page<Book> findPaginated(Pageable pageable) {
+    public Page<Book> findPaginated(Pageable pageable, boolean sortOrNoSort) {
 
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Book> books = booksRepository.findAll();
         List<Book> list;
+
+        if (sortOrNoSort) {
+            books.sort(new Comparator<Book>() {
+                @Override
+                public int compare(Book o1, Book o2) {
+                    return o1.getYear() - o2.getYear();
+                }
+            });
+        }
 
         if (books.size() < startItem) {
             list = Collections.emptyList();
