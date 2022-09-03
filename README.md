@@ -1,11 +1,12 @@
 # Цифровая библиотека
+.....................
 
-RESTfull приложение написано с использованиемЖ
+RESTfull приложение написано с использованием:
   Spring Framework;
   Hibernate + Data JPA (В ранних версиях были использовани JDBC API и JDBC Template);
   Maven;
   PostgreSQL;
-  Thymeleaf
+  Thymeleaf.
   
  SQL код для создания таблиц находится в файле sql/db_create_tables.sql
  
