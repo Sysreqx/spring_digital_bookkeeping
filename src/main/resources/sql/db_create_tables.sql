@@ -37,6 +37,57 @@ insert into Book (person_id, name, author, year) values (4, 'Book#8', 'Author#4'
 
 insert into Book (person_id, name, author, year) values (null, 'Book#9', 'Author#4' , 2011);
 
+-- // insert
+insert into Book (person_id, name, author, year) values (null, 'Book#11', 'Author#1' , 1997);
+insert into Book (person_id, name, author, year) values (null, 'Book#21', 'Author#1' , 2000);
+insert into Book (person_id, name, author, year) values (null, 'Book#31', 'Author#2' , 2001);
+insert into Book (person_id, name, author, year) values (null, 'Book#41', 'Author#2' , 1986);
+insert into Book (person_id, name, author, year) values (null, 'Book#51', 'Author#2' , 1855);
+insert into Book (person_id, name, author, year) values (null, 'Book#61', 'Author#3' , 1967);
+insert into Book (person_id, name, author, year) values (null, 'Book#71', 'Author#4' , 1999);
+insert into Book (person_id, name, author, year) values (null, 'Book#81', 'Author#4' , 2011);
+insert into Book (person_id, name, author, year) values (null, 'Book#91', 'Author#4' , 2011);
+
+insert into Book (person_id, name, author, year) values (null, 'Book#12', 'Author#1' , 1997);
+insert into Book (person_id, name, author, year) values (null, 'Book#22', 'Author#1' , 2000);
+insert into Book (person_id, name, author, year) values (null, 'Book#32', 'Author#2' , 2001);
+insert into Book (person_id, name, author, year) values (null, 'Book#42', 'Author#2' , 1986);
+insert into Book (person_id, name, author, year) values (null, 'Book#52', 'Author#2' , 1855);
+insert into Book (person_id, name, author, year) values (null, 'Book#62', 'Author#3' , 1967);
+insert into Book (person_id, name, author, year) values (null, 'Book#72', 'Author#4' , 1999);
+insert into Book (person_id, name, author, year) values (null, 'Book#82', 'Author#4' , 2011);
+insert into Book (person_id, name, author, year) values (null, 'Book#92', 'Author#4' , 2011);
+
+insert into Book (person_id, name, author, year) values (null, 'Book#13', 'Author#1' , 1997);
+insert into Book (person_id, name, author, year) values (null, 'Book#23', 'Author#1' , 2000);
+insert into Book (person_id, name, author, year) values (null, 'Book#33', 'Author#2' , 2001);
+insert into Book (person_id, name, author, year) values (null, 'Book#43', 'Author#2' , 1986);
+insert into Book (person_id, name, author, year) values (null, 'Book#53', 'Author#2' , 1855);
+insert into Book (person_id, name, author, year) values (null, 'Book#63', 'Author#3' , 1967);
+insert into Book (person_id, name, author, year) values (null, 'Book#73', 'Author#4' , 1999);
+insert into Book (person_id, name, author, year) values (null, 'Book#83', 'Author#4' , 2011);
+insert into Book (person_id, name, author, year) values (null, 'Book#93', 'Author#4' , 2011);
+
+insert into Book (person_id, name, author, year) values (null, 'Book#14', 'Author#1' , 1997);
+insert into Book (person_id, name, author, year) values (null, 'Book#24', 'Author#1' , 2000);
+insert into Book (person_id, name, author, year) values (null, 'Book#34', 'Author#2' , 2001);
+insert into Book (person_id, name, author, year) values (null, 'Book#44', 'Author#2' , 1986);
+insert into Book (person_id, name, author, year) values (null, 'Book#54', 'Author#2' , 1855);
+insert into Book (person_id, name, author, year) values (null, 'Book#64', 'Author#3' , 1967);
+insert into Book (person_id, name, author, year) values (null, 'Book#74', 'Author#4' , 1999);
+insert into Book (person_id, name, author, year) values (null, 'Book#84', 'Author#4' , 2011);
+insert into Book (person_id, name, author, year) values (null, 'Book#94', 'Author#4' , 2011);
+
+insert into Book (person_id, name, author, year) values (null, 'Book#15', 'Author#1' , 1997);
+insert into Book (person_id, name, author, year) values (null, 'Book#25', 'Author#1' , 2000);
+insert into Book (person_id, name, author, year) values (null, 'Book#35', 'Author#2' , 2001);
+insert into Book (person_id, name, author, year) values (null, 'Book#45', 'Author#2' , 1986);
+insert into Book (person_id, name, author, year) values (null, 'Book#55', 'Author#2' , 1855);
+insert into Book (person_id, name, author, year) values (null, 'Book#65', 'Author#3' , 1967);
+insert into Book (person_id, name, author, year) values (null, 'Book#75', 'Author#4' , 1999);
+insert into Book (person_id, name, author, year) values (null, 'Book#85', 'Author#4' , 2011);
+insert into Book (person_id, name, author, year) values (null, 'Book#95', 'Author#4' , 2011);
+
 -- // test
 select * from Book;
 

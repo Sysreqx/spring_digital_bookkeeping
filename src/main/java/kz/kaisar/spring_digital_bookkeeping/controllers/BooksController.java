@@ -5,14 +5,18 @@ import kz.kaisar.spring_digital_bookkeeping.models.Person;
 import kz.kaisar.spring_digital_bookkeeping.services.BooksService;
 import kz.kaisar.spring_digital_bookkeeping.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/books")
@@ -30,13 +34,32 @@ public class BooksController {
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("books", booksService.findAll());
+    public String index(Model model,
+                        @RequestParam("page") Optional<Integer> page,
+                        @RequestParam("size") Optional<Integer> size) {
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<Book> bookPage = booksService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        //model.addAttribute("books", booksService.findAll());
+        model.addAttribute("bookPage", bookPage);
+
+        int totalPages = bookPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "books/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model,
+    public String show(@PathVariable("id") int id,
+                       Model model,
                        @ModelAttribute("person") Person person, BindingResult bindingResult) {
         model.addAttribute("book", booksService.findOne(id));
 
@@ -51,7 +74,7 @@ public class BooksController {
     }
 
     @GetMapping("/new")
-    public String newBook(@ModelAttribute("book") Book book, BindingResult bindingResult) {
+    public String newBook(@ModelAttribute("book") Book book) {
         return "books/new";
     }
 
@@ -95,7 +118,9 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}/assign")
-    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson, BindingResult bindingResult) {
+    public String assign(@PathVariable("id") int id,
+                         @ModelAttribute("person") Person selectedPerson,
+                         BindingResult bindingResult) {
         booksService.assign(id, selectedPerson);
         return "redirect:/books/" + id;
     }

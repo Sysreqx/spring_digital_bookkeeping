@@ -6,10 +6,23 @@
 </head>
 <body>
 
-    <div th:each="book : ${books}">
-        <a th:href="@{/books/{id} (id=${book.getId()})}"
-           th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
-    </div>
+<!--    <div th:each="book : ${books}">-->
+<!--        <a th:href="@{/books/{id} (id=${book.getId()})}"-->
+<!--           th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>-->
+<!--    </div>-->
+
+    <nav>
+        <p th:each="book: ${bookPage}">
+            <a th:href="@{/books/{id} (id=${book.getId()})}"
+               th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
+        </p>
+    </nav>
+
+    <a th:if="${bookPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/books(size=${bookPage.size}, page=${pageNumber})}"
+           th:text=${pageNumber}></a>
+    </a>
 
     <br/>
     <hr/>
