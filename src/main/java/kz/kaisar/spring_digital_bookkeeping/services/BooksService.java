@@ -50,7 +50,6 @@ public class BooksService {
         return Optional.ofNullable(findOne(id).getOwner());
     }
 
-
     @Transactional
     public void release(int id) {
         findOne(id).setOwner(null);

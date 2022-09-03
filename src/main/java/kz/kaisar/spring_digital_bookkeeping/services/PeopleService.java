@@ -3,11 +3,14 @@ package kz.kaisar.spring_digital_bookkeeping.services;
 import kz.kaisar.spring_digital_bookkeeping.models.Book;
 import kz.kaisar.spring_digital_bookkeeping.models.Person;
 import kz.kaisar.spring_digital_bookkeeping.repositories.PeopleRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -48,6 +51,8 @@ public class PeopleService {
     }
 
     public List<Book> getBooksByPersonId(int id) {
-        return findOne(id).getBooks();
+        Optional<Person> person = peopleRepository.findById(id);
+        Hibernate.initialize(person.orElse(null));
+        return Objects.requireNonNull(person.orElse(null)).getBooks();
     }
 }
