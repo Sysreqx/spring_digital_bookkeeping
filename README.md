@@ -1,5 +1,4 @@
-# spring_digital_bookkeeping
-digital bookkeeping
+# Цифровая библиотека
 
 RESTfull приложение написано с использованиемЖ
   Spring Framework;
