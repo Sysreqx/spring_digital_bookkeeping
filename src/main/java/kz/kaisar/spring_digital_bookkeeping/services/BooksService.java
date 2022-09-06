@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -60,6 +62,11 @@ public class BooksService {
                 = new PageImpl<Book>(list, PageRequest.of(currentPage, pageSize), books.size());
 
         return bookPage;
+    }
+
+    public List<Book> findByNameContaining(String name) {
+
+        return booksRepository.findByNameContaining(name);
     }
 
     public Book findOne(int id) {

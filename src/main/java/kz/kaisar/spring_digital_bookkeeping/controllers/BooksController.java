@@ -7,14 +7,12 @@ import kz.kaisar.spring_digital_bookkeeping.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,10 +59,27 @@ public class BooksController {
             return "books/index";
     }
 
+    @GetMapping("/search")
+    public String search() {
+
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String search(Model model,
+                         @RequestParam("bookName") String bookName) {
+
+        List<Book> books = booksService.findByNameContaining(bookName);
+
+        model.addAttribute("books", books);
+
+        return "books/search";
+    }
+
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id,
                        Model model,
-                       @ModelAttribute("person") Person person, BindingResult bindingResult) {
+                       @ModelAttribute("person") Person person) {
         model.addAttribute("book", booksService.findOne(id));
 
         Optional<Person> bookOwner = booksService.getBookOwner(id);
@@ -123,8 +138,7 @@ public class BooksController {
 
     @PatchMapping("/{id}/assign")
     public String assign(@PathVariable("id") int id,
-                         @ModelAttribute("person") Person selectedPerson,
-                         BindingResult bindingResult) {
+                         @ModelAttribute("person") Person selectedPerson) {
         booksService.assign(id, selectedPerson);
         return "redirect:/books/" + id;
     }
