@@ -5,14 +5,11 @@ import kz.kaisar.spring_digital_bookkeeping.models.Person;
 import kz.kaisar.spring_digital_bookkeeping.repositories.PeopleRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -51,11 +48,34 @@ public class PeopleService {
         peopleRepository.deleteById(id);
     }
 
-    public List<Book> getBooksByPersonId(int id) {
+//    public List<Book> getBooksByPersonId(int id) {
+//
+//        Optional<Person> person = peopleRepository.findById(id);
+//
+//        Hibernate.initialize(person.get().getBooks());
+//
+//        return person.get().getBooks();
+//    }
+
+    public List<Book> getBooksByPersonIdWithIsExpiredDate(int id) {
 
         Optional<Person> person = peopleRepository.findById(id);
 
-        Hibernate.initialize(person.get().getBooks());
+        Hibernate.initialize(person.orElseThrow().getBooks());
+
+        long milliseconds;
+        long days;
+
+        for (Book book : person.get().getBooks()) {
+            if (book.getTakenDate() != null) {
+                milliseconds = (new Date().getTime() - book.getTakenDate().getTime());
+                days = TimeUnit.MILLISECONDS.toDays(milliseconds);
+
+                if (days > 10)
+                    book.setExpired(true);
+            }
+        }
+
         return person.get().getBooks();
     }
 

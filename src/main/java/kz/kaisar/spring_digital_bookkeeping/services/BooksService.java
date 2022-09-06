@@ -11,13 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Query;
-import javax.persistence.EntityManager;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -96,11 +94,15 @@ public class BooksService {
 
     @Transactional
     public void release(int id) {
-        findOne(id).setOwner(null);
+        Book book = findOne(id);
+        book.setTakenDate(null);
+        book.setOwner(null);
     }
 
     @Transactional
     public void assign(int id, Person selectedPerson) {
-        findOne(id).setOwner(selectedPerson);
+        Book book = findOne(id);
+        book.setTakenDate(new Timestamp(System.currentTimeMillis()));
+        book.setOwner(selectedPerson);
     }
 }

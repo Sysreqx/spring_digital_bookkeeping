@@ -89,8 +89,16 @@ insert into Book (person_id, name, author, year) values (null, 'Book#85', 'Autho
 insert into Book (person_id, name, author, year) values (null, 'Book#95', 'Author#4' , 2011);
 
 -- // test
+select * from Person;
 select * from Book;
 
 UPDATE Book SET person_id = 2 WHERE id = 10;
 
 select p.name, b.name from Person p left join book b on p.id = b.person_id;
+
+--// alter
+
+alter table Book add taken_date timestamp;
+
+update book set taken_date = (to_timestamp('16-05-2011', 'dd-MM-yyyy')) where id = 1;
+update book set taken_date = (to_timestamp('16-05-2011', 'dd-MM-yyyy')) where id = 33;
